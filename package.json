@@ -5,6 +5,7 @@
   "description": "App & REST API for handling any members with NODE & REACT",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/index.js",
     "nodemon": "nodemon ./api/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
