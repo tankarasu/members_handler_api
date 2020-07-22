@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "members_handler_app",
+  "version": "1.0.0",
+  "description": "App & REST API for handling any members with NODE & REACT",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "nodemon ./api/src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.25"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
+}
