@@ -14,6 +14,16 @@ let checkId = (id) => {
 router
   .route("/users")
   .get((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT,  DELETE"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
     db.collection("members")
       .find({})
       .toArray((err, result) => {
@@ -23,6 +33,16 @@ router
       });
   })
   .post((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT,  DELETE"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
     let user = new member({ id: 1, name: req.body.name });
     db.collection("members").insertOne(user, (err, result) => {
       if (err) throw err;
@@ -66,6 +86,16 @@ router
     });
   })
   .put(async (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT,  DELETE"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
     if (!checkId(req.params.id)) {
       res.send("Not a valid ID");
       return;
@@ -84,6 +114,16 @@ router
     );
   })
   .delete(async (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT,  DELETE"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
     if (!checkId(req.params.id)) {
       res.send("Not a valid ID");
       return;
