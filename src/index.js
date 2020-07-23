@@ -1,6 +1,6 @@
 //variables globales
 const port = process.env.PORT || 3030;
-import { morganChalk } from "./morganChalk.js";
+// import { morganChalk } from "./morganChalk.js";
 
 //initialisation Express
 import express from "express";
@@ -25,7 +25,7 @@ db.once("open", () => {
 });
 
 //middleware
-app.use(morganChalk);
+// app.use(morganChalk);
 
 //routes
 import { router as memberRouter } from "./routes/member.js";
