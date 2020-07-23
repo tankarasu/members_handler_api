@@ -14,32 +14,34 @@ let checkId = (id) => {
 router
   .route("/users")
   .get((req, res, next) => {
-    db.collection("members")
-      .find({})
-      .toArray((err, result) => {
-        if (err) throw err;
-        res.json(result);
-        next();
-      });
-  })
-  .post((req, res, next) => {
-    let user = new member({ id: 1, name: req.body.name });
-    db.collection("members").insertOne(user, (err, result) => {
+    member.find({}, (err, result) => {
       if (err) throw err;
-      res.send(result["ops"]);
+      res.json(result);
       next();
     });
-    db.collection("members")
-      .find({})
-      .toArray((err, result) => {
-        if (err) throw err;
-        result.forEach((element) => {
-          db.collection("members").updateOne(element, {
-            $set: { id: result.indexOf(element) },
-          });
-        });
-        next();
+  })
+  .post(async (req, res, next) => {
+    let user = new member({ id: 1, name: req.body.name });
+
+    await member.create(user, (err, result) => {
+      if (err) throw err;
+      res.send(result.name + " added to DB");
+      next();
+    });
+    await member.find({}, (err, result) => {
+      if (err) throw err;
+      result.forEach((element) => {
+        member.findByIdAndUpdate(
+          element._id,
+          { id: result.indexOf(element) },
+          { useFindAndModify: false },
+          (err) => {
+            if (err) throw err;
+          }
+        );
       });
+      next();
+    });
   });
 
 router
@@ -79,20 +81,24 @@ router
       return;
     }
     await member.deleteOne({ id: req.params.id }, (err) => {
+      if (err) throw err;
       res.send(`user deleted`);
       next();
     });
-    db.collection("members")
-      .find({})
-      .toArray((err, result) => {
-        if (err) throw err;
-        result.forEach((element) => {
-          db.collection("members").updateOne(element, {
-            $set: { id: result.indexOf(element) },
-          });
-        });
-        next();
+    await member.find({}, (err, result) => {
+      if (err) throw err;
+      result.forEach((element) => {
+        member.findByIdAndUpdate(
+          element._id,
+          { id: result.indexOf(element) },
+          { useFindAndModify: false },
+          (err) => {
+            if (err) throw err;
+          }
+        );
       });
+      next();
+    });
   });
 
 export { router };
