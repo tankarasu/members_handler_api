@@ -82,7 +82,18 @@ router
     }
     await member.updateOne(
       { id: req.params.id },
-      { name: req.body.name },
+      {
+        name: req.body.name,
+        lastName: req.body.lastName,
+        avatar: req.body.avatar,
+        bornAt: req.body.bornAt,
+        adress: req.body.adress,
+        zip: req.body.zip,
+        city: req.body.city,
+        tel1: req.body.tel1,
+        tel2: req.body.tel2,
+        eMail: req.body.eMail,
+      },
       (err, result) => {
         if (err) throw err;
         member.findOne({ id: req.params.id }, (err, result) => {});
