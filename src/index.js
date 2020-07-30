@@ -9,7 +9,7 @@ import cors from "cors";
 
 //Body-Parser
 import bodyParser from "body-parser";
-app.use(cors({ origin: true, methods: ["GET", "POST", "PUT", "DELETE"] }));
+app.use(cors({ origin: "*", methods: ["GET", "POST", "PUT", "DELETE"] }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
